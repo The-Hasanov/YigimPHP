@@ -1,0 +1,39 @@
+{
+    "name": "chameleon/yigimphp",
+    "license": "MIT",
+    "description": "Yigim PHP & Laravel package",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Hikmet Hesenov",
+            "email": "hikmet.hesenov.93@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1",
+        "illuminate/support": "5.5.x|5.6.x|5.7.x",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.3@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chameleon\\Yigim\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Chameleon\\Yigim\\Yigim"
+            ],
+            "aliases": {
+                "Yigim": "Chameleon\\Yigim\\YigimFacade"
+            }
+        }
+    },
+    "scripts": {
+        "fix": [
+            "php-cs-fixer fix src"
+        ]
+    }
+}
