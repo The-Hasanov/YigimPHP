@@ -98,7 +98,7 @@ class Yigim
     {
         return $this->request('POST', 'biller/clients', [
             'form_params' => $param
-        ], ['Content-Type' => 'application/x-www-form-urlencoded']);
+        ]);
     }
 
     /**
