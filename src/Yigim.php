@@ -66,14 +66,14 @@ class Yigim
     }
 
     /**
-     * @param $reference
+     * @param $refCompany
      * @return YigimResponse
      */
-    public function setDefaultCompany($reference)
+    public function setDefaultCompany($refCompany)
     {
         return $this->request('PUT', 'biller/companies/default', [
             'query' => [
-                'reference' => $reference
+                'reference' => $refCompany
             ]
         ]);
     }
@@ -90,13 +90,13 @@ class Yigim
     }
 
     /**
-     * @param string $ref
+     * @param string $refClient
      * @param array  $param
      * @return YigimResponse
      */
-    public function updateClient($ref, array $param)
+    public function updateClient($refClient, array $param)
     {
-        return $this->request('PUT', 'biller/clients/' . $ref, [
+        return $this->request('PUT', 'biller/clients/' . $refClient, [
             'query' => $param
         ]);
     }
@@ -106,7 +106,7 @@ class Yigim
      * @param int $offset
      * @return YigimResponse
      */
-    public function getClients($limit = 100, $offset = 0)
+    public function getClients($limit = 10, $offset = 0)
     {
         return $this->request('GET', 'biller/clients', [
             'query' => [
@@ -126,12 +126,12 @@ class Yigim
     }
 
     /**
-     * @param $ref
+     * @param $refClient
      * @return YigimResponse
      */
-    public function deleteClient($ref)
+    public function deleteClient($refClient)
     {
-        return $this->request('DELETE', 'biller/clients/' . $ref);
+        return $this->request('DELETE', 'biller/clients/' . $refClient);
     }
 
     /**
@@ -146,77 +146,77 @@ class Yigim
     }
 
     /**
-     * @param       $number
+     * @param int   $numInvoice
      * @param array $params
      * @return YigimResponse
      */
-    public function updateInvoice($number, array $params)
+    public function updateInvoice($numInvoice, array $params)
     {
-        return $this->request('PUT', 'biller/invoices/' . $number, [
+        return $this->request('PUT', 'biller/invoices/' . $numInvoice, [
             'query' => $params
         ]);
     }
 
     /**
-     * @param int  $limit
-     * @param int  $offset
-     * @param null $client
+     * @param string $msisdn
+     * @param int    $limit
+     * @param int    $offset
      * @return YigimResponse
      */
-    public function getInvoices($limit = 100, $offset = 0, $client = null)
+    public function getInvoices($msisdn = null, $limit = 100, $offset = 0)
     {
         return $this->request('GET', 'biller/invoices', [
             'query' => array_filter([
                 'offset' => $offset,
                 'limit'  => $limit,
-                'msisdn' => $client
+                'msisdn' => $msisdn
             ])
         ]);
     }
 
     /**
-     * @param string $ref
+     * @param int $numInvoice
      * @return YigimResponse
      */
-    public function getInvoice($ref)
+    public function getInvoice($numInvoice)
     {
-        return $this->request('GET', 'biller/invoices/' . $ref);
+        return $this->request('GET', 'biller/invoices/' . $numInvoice);
     }
 
     /**
-     * @param $ref
+     * @param int $numInvoice
      * @return YigimResponse
      */
-    public function deleteInvoice($ref)
+    public function deleteInvoice($numInvoice)
     {
-        return $this->request('DELETE', 'biller/invoices/' . $ref);
+        return $this->request('DELETE', 'biller/invoices/' . $numInvoice);
     }
 
     /**
-     * @param int  $limit
-     * @param int  $offset
-     * @param null $payment
+     * @param int $numInvoice
+     * @param int $limit
+     * @param int $offset
      * @return YigimResponse
      */
-    public function getPayments($limit = 100, $offset = 0, $payment = null)
+    public function getPayments($numInvoice = null, $limit = 100, $offset = 0)
     {
         return $this->request('GET', 'biller/payments', [
             'query' => array_filter([
+                'invoice' => $numInvoice,
                 'offset'  => $offset,
-                'limit'   => $limit,
-                'invoice' => $payment
+                'limit'   => $limit
             ])
         ]);
     }
 
 
     /**
-     * @param string $ref
+     * @param string $refPayment
      * @return YigimResponse
      */
-    public function getPayment($ref)
+    public function getPayment($refPayment)
     {
-        return $this->request('GET', 'biller/payments/' . $ref);
+        return $this->request('GET', 'biller/payments/' . $refPayment);
     }
 
 

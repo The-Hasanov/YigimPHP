@@ -80,11 +80,12 @@ class YigimResponse implements Arrayable
     }
 
     /**
+     * @param string|int $param
      * @return array|null
      */
-    public function payload()
+    public function payload($param = null)
     {
-        return $this->getAttribute('payload');
+        return array_get($this->getAttribute('payload'), $param);
     }
 
 
