@@ -82,18 +82,6 @@ class Yigim
      * @param array $param
      * @return YigimResponse
      */
-    public function createCompany(array $param)
-    {
-        return $this->request('POST', 'biller/companies', [
-            'form_params' => $param
-        ]);
-    }
-
-
-    /**
-     * @param array $param
-     * @return YigimResponse
-     */
     public function createClient(array $param)
     {
         return $this->request('POST', 'biller/clients', [
@@ -129,12 +117,12 @@ class Yigim
     }
 
     /**
-     * @param string $ref
+     * @param string $msisdn
      * @return YigimResponse
      */
-    public function getClient($ref)
+    public function getClient($msisdn)
     {
-        return $this->request('GET', 'biller/clients/' . $ref);
+        return $this->request('GET', 'biller/clients/' . $msisdn);
     }
 
     /**
@@ -152,7 +140,7 @@ class Yigim
      */
     public function createInvoice(array $params)
     {
-        return $this->request('POST', 'biller/invoices', [], [
+        return $this->request('POST', 'biller/invoices', [
             'form_params' => $params
         ]);
     }
@@ -286,7 +274,7 @@ class Yigim
     /**
      * @return bool|string
      */
-    public function timeSpan()
+    private function timeSpan()
     {
         return hex2bin(str_pad(base_convert(time() * 5, 10, 16), 16, '0', STR_PAD_LEFT));
     }
