@@ -24,7 +24,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Chameleon\\Yigim\\Yigim"
+                "Chameleon\\Yigim\\YigimServiceProvider"
             ],
             "aliases": {
                 "Yigim": "Chameleon\\Yigim\\YigimFacade"
