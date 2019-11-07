@@ -9,12 +9,12 @@
             "email": "hikmet.hesenov.93@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=7.1",
         "illuminate/support": "5.5.x|5.6.x|5.7.x",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^6.3@dev"
+        "guzzlehttp/guzzle": "^6.4"
     },
     "autoload": {
         "psr-4": {

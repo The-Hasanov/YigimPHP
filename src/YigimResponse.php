@@ -43,7 +43,6 @@ class YigimResponse implements Arrayable
         $this->attributes = $response instanceof ResponseInterface
             ? json_decode($response->getBody(), true)
             : (array)$response;
-
         $this->attributes = $this->attributes['response'] ?? $this->attributes;
     }
 
@@ -80,12 +79,13 @@ class YigimResponse implements Arrayable
     }
 
     /**
-     * @param string|int $param
-     * @return array|null
+     * @param null $param
+     * @param null $default
+     * @return mixed
      */
-    public function payload($param = null)
+    public function payload($param = null, $default = null)
     {
-        return array_get($this->getAttribute('payload'), $param);
+        return array_get($this->getAttribute('payload'), $param, $default);
     }
 
 
