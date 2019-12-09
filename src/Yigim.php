@@ -4,6 +4,7 @@ namespace Chameleon\Yigim;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Illuminate\Support\Facades\Event;
 
 class Yigim
 {
@@ -47,6 +48,32 @@ class Yigim
             'base_uri' => static::API_URI,
             'timeout'  => 30,
         ]));
+    }
+
+    /**
+     * @param $type
+     * @param $action
+     * @param $listener
+     */
+    public static function listen($type, $action, $listener)
+    {
+        Event::listen(implode('.', [self::class, $type, $action]), $listener);
+    }
+
+    /**
+     * @param array $params
+     * @return YigimHook
+     */
+    public function handleHook($params = [])
+    {
+        $yigimHook = new YigimHook($params);
+        if ($yigimHook->isSecretValid()) {
+            Event::push(implode('.', [self::class, $yigimHook->type(), $yigimHook->action()]), [
+                'yigim' => $this,
+                'hook'  => $yigimHook
+            ]);
+        }
+        return $yigimHook;
     }
 
     /**
