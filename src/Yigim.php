@@ -47,6 +47,7 @@ class Yigim
         return new self($config['alias'], $config['key'], new Client([
             'base_uri' => static::API_URI,
             'timeout'  => 30,
+            'verify'   => false
         ]));
     }
 
