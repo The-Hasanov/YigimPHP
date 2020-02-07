@@ -168,9 +168,7 @@ class Yigim
      */
     public function createInvoice(array $params)
     {
-        return $this->request('POST', 'biller/invoices', [
-            'form_params' => $params
-        ]);
+        return $this->request('POST', 'biller/invoices', $this->preparePostBody($params));
     }
 
     /**
@@ -286,6 +284,27 @@ class Yigim
         ], $options['headers'] ?? [], $headers);
 
         return $options;
+    }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    private function preparePostBody($params)
+    {
+        $tempOptions = '';
+        if (isset($params['option']) && is_array($params['option'])) {
+            foreach ($params['option'] as $index => $param) {
+                $tempOptions .= '&' . http_build_query(['option' => $param]);
+            }
+            unset($params['option']);
+        }
+        return [
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded'
+            ],
+            'body'    => http_build_query($params, '', '&') . $tempOptions
+        ];
     }
 
 
