@@ -34,16 +34,20 @@ class YigimResponse implements Arrayable
      * @var array
      */
     protected $attributes = [];
+    /**
+     * @var mixed|array
+     */
+    private $response;
 
     /**
-     * @param array|ResponseInterface $response
+     * @param mixed|ResponseInterface $response
      */
     public function __construct($response)
     {
-        $this->attributes = $response instanceof ResponseInterface
+        $this->response = $response instanceof ResponseInterface
             ? json_decode($response->getBody(), true)
-            : (array)$response;
-        $this->attributes = $this->attributes['response'] ?? $this->attributes;
+            : $response;
+        $this->attributes = $this->response['response'] ?? $this->attributes;
     }
 
     /**
@@ -107,5 +111,13 @@ class YigimResponse implements Arrayable
     public function toArray()
     {
         return $this->attributes;
+    }
+
+    /**
+     * @return mixed|array
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 }
