@@ -53,11 +53,24 @@ class YigimHook implements Arrayable
     protected $attributes = [];
 
     /**
+     * @var string
+     */
+    protected $secretKey;
+
+    /**
      * @param array $params
      */
     public function __construct($params = [])
     {
         $this->attributes = $params;
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setSecretKey($value)
+    {
+        $this->secretKey = $value;
     }
 
     /**
@@ -97,6 +110,9 @@ class YigimHook implements Arrayable
      */
     public function isSecretValid()
     {
+        if ($this->secretKey) {
+            return $this->secret() === $this->secretKey;
+        }
         return true;
     }
 

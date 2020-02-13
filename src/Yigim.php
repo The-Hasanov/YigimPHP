@@ -65,9 +65,10 @@ class Yigim
      * @param array $params
      * @return YigimHook
      */
-    public function handleHook($params = [])
+    public function handleHook($hookKey, $params = [])
     {
         $yigimHook = new YigimHook($params);
+        $yigimHook->setSecretKey($hookKey);
         if ($yigimHook->isSecretValid()) {
             Event::push(implode('.', [self::class, $yigimHook->type(), $yigimHook->action()]), [
                 'yigim' => $this,
@@ -219,9 +220,9 @@ class Yigim
     }
 
     /**
-     * @param int $numInvoice
-     * @param int $limit
-     * @param int $offset
+     * @param string|int $numInvoice
+     * @param int        $limit
+     * @param int        $offset
      * @return YigimResponse
      */
     public function getPayments($numInvoice = null, $limit = 100, $offset = 0)
