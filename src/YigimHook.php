@@ -78,7 +78,7 @@ class YigimHook implements Arrayable
      */
     public function type()
     {
-        return $this->getAttribute('type');
+        return (int)$this->getAttribute('type');
     }
 
     /**
