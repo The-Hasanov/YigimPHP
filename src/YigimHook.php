@@ -44,7 +44,7 @@ class YigimHook implements Arrayable
         'UPDATE'    => 'U',
         'CANCEL'    => 'V',
         'PAID_FULL' => 'P',
-        'PAID_PART' => 'R',
+        'PAID_PART' => 'T',
         'DELETE'    => 'D'
     ];
     /**
