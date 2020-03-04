@@ -62,7 +62,8 @@ class Yigim
     }
 
     /**
-     * @param array $params
+     * @param string $hookKey
+     * @param array  $params
      * @return YigimHook
      */
     public function handleHook($hookKey, $params = [])
