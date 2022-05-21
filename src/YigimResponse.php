@@ -89,7 +89,7 @@ class YigimResponse implements Arrayable
      */
     public function payload($param = null, $default = null)
     {
-        return array_get($this->getAttribute('payload'), $param, $default);
+        return Arr::get($this->getAttribute('payload'), $param, $default);
     }
 
 
